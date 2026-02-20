@@ -1,0 +1,273 @@
+{
+  "kind": "build_request",
+  "title": "Online Learning Platform for Polytechnic Diploma Students (Branches, Materials, MCQs, Search, Admin)",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Create a coherent, modern, minimal educational UI theme (light colors, readable typography, clear spacing, card-based layouts) and apply it consistently across all pages with full responsiveness (mobile/tablet/desktop) and accessible contrast/focus states.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Design Style:\nModern, minimal, educational theme\nLight colors, readable fonts\nIcons and cards for subjects and branches"
+        ]
+      },
+      "acceptanceCriteria": [
+        "All pages render correctly at common breakpoints (mobile ~375px, tablet ~768px, desktop ~1280px) without overflow or broken layouts.",
+        "Interactive elements have visible focus states and meet basic accessibility expectations (labels, keyboard navigation, contrast).",
+        "Branch/semester/subject content is presented using consistent cards, headings, and spacing."
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Implement the core information architecture and navigation: Home, Branch (by branch), Semester (within branch), Subject (within semester), Study Materials, Question Papers, MCQ Practice, Syllabus Overview, Search Results, Login/Register, Admin Panel.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Home page with course categories by branch and semester",
+          "Each branch should have:\nSubject-wise study materials (PDF notes)\nPrevious years’ exam question papers\nMCQs with answers\nSyllabus overview",
+          "Admin panel to upload notes, papers, and MCQs"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Users can navigate from Home → Branch → Semester → Subject pages.",
+        "Each Subject page provides tabs/sections for Notes (PDF), Question Papers, MCQs, and Syllabus Overview.",
+        "Navigation is usable on mobile (e.g., responsive header/menu)."
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Model and display the supported branches: Computer Engineering, IT, Mechanical, Electrical, Civil, Electronics, and Automobile, including branch landing pages that list semesters and subjects.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "The website should support branches such as Computer Engineering, IT, Mechanical, Electrical, Civil, Electronics, and Automobile.",
+          "Home page with course categories by branch and semester"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Home page shows all listed branches as selectable cards.",
+        "Each branch page shows semester list and (when selected) subjects for that semester.",
+        "Branch names are user-facing in English exactly as provided (or common abbreviations only if also shown alongside full names)."
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Implement student authentication using Internet Identity and store a user profile record on first login; support a basic Register/Login UX that uses Internet Identity and shows logged-in state in the UI.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Login/Register for students"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Users can sign in and sign out using Internet Identity.",
+        "On first successful sign-in, a user profile record is created in the backend keyed by Principal.",
+        "UI clearly indicates whether the user is logged in (e.g., account menu / sign-in button)."
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Implement role-based access control for an Admin Panel: only authorized admin principals can access admin routes and perform upload/manage actions; unauthorized users are blocked from admin UI actions.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Admin panel to upload notes, papers, and MCQs"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Admin routes/components are not accessible to non-admin users (redirect or show access denied).",
+        "Backend enforces admin-only mutations (cannot be bypassed by calling the canister directly).",
+        "Provide a backend method to list current admins and to add/remove admins (admin-only)."
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "text": "Create backend data models and CRUD endpoints for: branches, semesters, subjects, notes (PDF), question papers (PDF), MCQs (question, options, correct answer, optional explanation), and syllabus overview text/structure.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Database for storing users, study materials, and MCQs",
+          "Each branch should have:\nSubject-wise study materials (PDF notes)\nPrevious years’ exam question papers\nMCQs with answers\nSyllabus overview"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Backend exposes query methods to list branches/semesters/subjects and to fetch subject details.",
+        "Backend exposes admin-only update methods to create/update/delete notes, papers, MCQs, and syllabus overview entries.",
+        "Data is persisted across canister upgrades using stable storage patterns."
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "text": "Implement study materials (PDF notes) module: subject-wise listing, file upload via Admin Panel, metadata (title, branch, semester, subject, year/term, tags), and a download action for students.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Subject-wise study materials (PDF notes)",
+          "Download option for notes and question papers",
+          "Admin panel to upload notes, papers, and MCQs"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Students can view a list of notes for a selected subject and download a PDF.",
+        "Admins can upload a new PDF note and see it appear in the subject’s notes list.",
+        "Each note shows at least title and relevant academic context (branch/semester/subject) in the UI."
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "text": "Implement previous years’ exam question papers module: subject-wise listing, file upload via Admin Panel, metadata (year, exam type/term if provided), and download action.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Previous years’ exam question papers",
+          "Download option for notes and question papers"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Students can view a list of question papers for a selected subject and download a PDF.",
+        "Admins can upload question papers and manage (edit/delete) entries.",
+        "UI supports basic filtering/sorting by year when multiple papers exist."
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "text": "Implement MCQ features: (1) browse MCQs with answers and explanations (if provided), (2) MCQ practice mode that randomizes or sequences questions, captures user selections, and displays score at the end.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "MCQs with answers",
+          "MCQ practice section with score display"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Students can browse MCQs for a subject and reveal correct answers.",
+        "Practice mode allows answering a set of MCQs and shows a final score (e.g., X/Y) and optionally a review of incorrect questions.",
+        "MCQs are stored and managed via Admin Panel (add/edit/delete)."
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "text": "Implement syllabus overview pages per subject (or per branch/semester when applicable) and show them in a clear, readable format on the subject page.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Syllabus overview"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Each subject can display a syllabus overview section (structured text or headings) retrieved from the backend.",
+        "Admins can update syllabus content for a subject in the Admin Panel.",
+        "Syllabus content is readable and responsive, using consistent typography."
+      ]
+    },
+    {
+      "id": "REQ-11",
+      "text": "Add a global search bar that searches across subjects, notes, question papers, and MCQs; show categorized results and allow navigation to the relevant subject/content.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Search bar to find subjects, papers, or MCQs quickly"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Typing a query returns results that include matches from subjects, notes, papers, and MCQs.",
+        "Search results are grouped or labeled by type (e.g., Subjects / Notes / Papers / MCQs).",
+        "Selecting a result navigates to the relevant page (subject detail or specific content listing)."
+      ]
+    },
+    {
+      "id": "REQ-12",
+      "text": "Ensure the app is simple, fast-loading, and accessible: use efficient client-side data fetching/caching, show loading/empty/error states, and avoid unnecessary large assets on initial load.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Simple, fast-loading, and accessible design"
+        ]
+      },
+      "acceptanceCriteria": [
+        "All data-driven screens have explicit loading and error UI states.",
+        "Repeated navigations reuse cached data where appropriate (no excessive refetching).",
+        "No page depends on downloading large PDFs just to render the listing UI (PDFs download only on user action)."
+      ]
+    },
+    {
+      "id": "REQ-13",
+      "text": "Add static generated icons/illustrations for the seven branches and display them on branch cards and/or headers.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Icons and cards for subjects and branches"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The seven branch icons are present in frontend/public/assets/generated and are used in the UI.",
+        "Icons are visually consistent (same style, stroke/filled treatment, and sizing) and remain clear on light backgrounds.",
+        "Branch cards show icon + branch name in a clean, modern layout."
+      ]
+    }
+  ],
+  "constraints": [
+    "Use React + TypeScript with Tailwind and React Query on the frontend.",
+    "Use a single Motoko actor backend; do not introduce additional backend services.",
+    "Authentication must use Internet Identity (no third-party auth providers).",
+    "Do not edit frontend paths listed as immutable by the platform (compose UI using existing components instead).",
+    "All user-facing text must be in English."
+  ],
+  "nonGoals": [
+    "Integrate Firebase, Node.js, PHP, or any external database/cloud backend outside the Internet Computer.",
+    "Implement real-time chat, push notifications, email/SMS messaging, or social media integrations.",
+    "Add payments or subscriptions."
+  ],
+  "imageRequirements": {
+    "required": [
+      "Minimal flat educational icon for Computer Engineering (branch-computer.dim_256x256.png)",
+      "Minimal flat educational icon for IT (branch-it.dim_256x256.png)",
+      "Minimal flat educational icon for Mechanical Engineering (branch-mechanical.dim_256x256.png)",
+      "Minimal flat educational icon for Electrical Engineering (branch-electrical.dim_256x256.png)",
+      "Minimal flat educational icon for Civil Engineering (branch-civil.dim_256x256.png)",
+      "Minimal flat educational icon for Electronics Engineering (branch-electronics.dim_256x256.png)",
+      "Minimal flat educational icon for Automobile Engineering (branch-automobile.dim_256x256.png)"
+    ],
+    "edits": []
+  }
+}

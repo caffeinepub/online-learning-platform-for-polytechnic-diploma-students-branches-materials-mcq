@@ -1,0 +1,282 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-create-a-coherent-modern-minimal-educational-ui-theme-light-colors-readable-typography-clear-spacing-card-based-layouts-and-apply-it-consistently-across-all-pages-with-full-responsiveness-mobile-tablet-desktop-and-accessible-contrast-focus-states",
+      "featureTitle": "Create a coherent, modern, minimal educational UI theme (light colors, readable typography, clear spacing, card-based layouts) and apply it consistently across all pages with full responsiveness (mobile/tablet/desktop) and accessible contrast/focus states.",
+      "files": [
+        "frontend/src/components/layout/AppLayout.tsx",
+        "frontend/src/index.css",
+        "frontend/tailwind.config.js"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-the-core-information-architecture-and-navigation-home-branch-by-branch-semester-within-branch-subject-within-semester-study-materials-question-papers-mcq-practice-syllabus-overview-search-results-login-register-admin-panel",
+      "featureTitle": "Implement the core information architecture and navigation: Home, Branch (by branch), Semester (within branch), Subject (within semester), Study Materials, Question Papers, MCQ Practice, Syllabus Overview, Search Results, Login/Register, Admin Panel.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/nav/Header.tsx",
+        "frontend/src/pages/AuthPage.tsx",
+        "frontend/src/pages/BranchPage.tsx",
+        "frontend/src/pages/HomePage.tsx",
+        "frontend/src/pages/SearchResultsPage.tsx",
+        "frontend/src/pages/SubjectPage.tsx",
+        "frontend/src/pages/admin/AdminPanelPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-model-and-display-the-supported-branches-computer-engineering-it-mechanical-electrical-civil-electronics-and-automobile-including-branch-landing-pages-that-list-semesters-and-subjects",
+      "featureTitle": "Model and display the supported branches: Computer Engineering, IT, Mechanical, Electrical, Civil, Electronics, and Automobile, including branch landing pages that list semesters and subjects.",
+      "files": [
+        "frontend/src/components/branches/BranchCard.tsx",
+        "frontend/src/data/branches.ts",
+        "frontend/src/pages/BranchPage.tsx",
+        "frontend/src/pages/HomePage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-student-authentication-using-internet-identity-and-store-a-user-profile-record-on-first-login-support-a-basic-register-login-ux-that-uses-internet-identity-and-shows-logged-in-state-in-the-ui",
+      "featureTitle": "Implement student authentication using Internet Identity and store a user profile record on first login; support a basic Register/Login UX that uses Internet Identity and shows logged-in state in the UI.",
+      "files": [
+        "frontend/src/components/auth/ProfileSetupDialog.tsx",
+        "frontend/src/components/nav/Header.tsx",
+        "frontend/src/pages/AuthPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-role-based-access-control-for-an-admin-panel-only-authorized-admin-principals-can-access-admin-routes-and-perform-upload-manage-actions-unauthorized-users-are-blocked-from-admin-ui-actions",
+      "featureTitle": "Implement role-based access control for an Admin Panel: only authorized admin principals can access admin routes and perform upload/manage actions; unauthorized users are blocked from admin UI actions.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/auth/AccessDeniedScreen.tsx",
+        "frontend/src/components/auth/AdminRouteGuard.tsx",
+        "frontend/src/pages/admin/AdminPanelPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-5"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-study-materials-pdf-notes-module-subject-wise-listing-file-upload-via-admin-panel-metadata-title-branch-semester-subject-year-term-tags-and-a-download-action-for-students",
+      "featureTitle": "Implement study materials (PDF notes) module: subject-wise listing, file upload via Admin Panel, metadata (title, branch, semester, subject, year/term, tags), and a download action for students.",
+      "files": [
+        "frontend/src/components/admin/NotesManager.tsx",
+        "frontend/src/components/subject/NotesList.tsx",
+        "frontend/src/pages/SubjectPage.tsx",
+        "frontend/src/pages/admin/AdminPanelPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-7"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-previous-years-exam-question-papers-module-subject-wise-listing-file-upload-via-admin-panel-metadata-year-exam-type-term-if-provided-and-download-action",
+      "featureTitle": "Implement previous years’ exam question papers module: subject-wise listing, file upload via Admin Panel, metadata (year, exam type/term if provided), and download action.",
+      "files": [
+        "frontend/src/components/admin/QuestionPapersManager.tsx",
+        "frontend/src/components/subject/QuestionPapersList.tsx",
+        "frontend/src/pages/SubjectPage.tsx",
+        "frontend/src/pages/admin/AdminPanelPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-8"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-mcq-features-1-browse-mcqs-with-answers-and-explanations-if-provided-2-mcq-practice-mode-that-randomizes-or-sequences-questions-captures-user-selections-and-displays-score-at-the-end",
+      "featureTitle": "Implement MCQ features: (1) browse MCQs with answers and explanations (if provided), (2) MCQ practice mode that randomizes or sequences questions, captures user selections, and displays score at the end.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/admin/MCQManager.tsx",
+        "frontend/src/components/subject/MCQBrowser.tsx",
+        "frontend/src/pages/MCQPracticePage.tsx",
+        "frontend/src/pages/SubjectPage.tsx",
+        "frontend/src/pages/admin/AdminPanelPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-9"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-syllabus-overview-pages-per-subject-or-per-branch-semester-when-applicable-and-show-them-in-a-clear-readable-format-on-the-subject-page",
+      "featureTitle": "Implement syllabus overview pages per subject (or per branch/semester when applicable) and show them in a clear, readable format on the subject page.",
+      "files": [
+        "frontend/src/components/admin/SyllabusEditor.tsx",
+        "frontend/src/components/subject/SyllabusOverview.tsx",
+        "frontend/src/pages/SubjectPage.tsx",
+        "frontend/src/pages/admin/AdminPanelPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-10"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-a-global-search-bar-that-searches-across-subjects-notes-question-papers-and-mcqs-show-categorized-results-and-allow-navigation-to-the-relevant-subject-content",
+      "featureTitle": "Add a global search bar that searches across subjects, notes, question papers, and MCQs; show categorized results and allow navigation to the relevant subject/content.",
+      "files": [
+        "frontend/src/components/nav/Header.tsx",
+        "frontend/src/components/search/GlobalSearchBar.tsx",
+        "frontend/src/pages/SearchResultsPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-11"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-ensure-the-app-is-simple-fast-loading-and-accessible-use-efficient-client-side-data-fetching-caching-show-loading-empty-error-states-and-avoid-unnecessary-large-assets-on-initial-load",
+      "featureTitle": "Ensure the app is simple, fast-loading, and accessible: use efficient client-side data fetching/caching, show loading/empty/error states, and avoid unnecessary large assets on initial load.",
+      "files": [
+        "frontend/src/main.tsx",
+        "frontend/src/pages/BranchPage.tsx",
+        "frontend/src/pages/SubjectPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-12"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-static-generated-icons-illustrations-for-the-seven-branches-and-display-them-on-branch-cards-and-or-headers",
+      "featureTitle": "Add static generated icons/illustrations for the seven branches and display them on branch cards and/or headers.",
+      "files": [
+        "frontend/src/components/branches/BranchCard.tsx",
+        "frontend/src/data/branches.ts",
+        "frontend/src/pages/BranchPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-13"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

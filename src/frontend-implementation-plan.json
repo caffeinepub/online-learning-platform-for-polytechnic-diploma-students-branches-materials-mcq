@@ -1,0 +1,479 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Polytechnic Diploma Learning Platform (Frontend)",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Establish a modern, minimal, responsive educational theme with accessible typography, spacing, cards, and focus states across the app.",
+      "acceptanceCriteria": [
+        "All pages render correctly at common breakpoints (mobile ~375px, tablet ~768px, desktop ~1280px) without overflow or broken layouts.",
+        "Interactive elements have visible focus states and meet basic accessibility expectations (labels, keyboard navigation, contrast).",
+        "Branch/semester/subject content is presented using consistent cards, headings, and spacing."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "create",
+          "description": "Create the global Tailwind entry stylesheet for the light, minimal educational theme: base typography defaults, focus-visible styles, consistent spacing tokens, and reusable utility patterns for card-based layouts."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Adjust Tailwind theme tokens (colors/radius/shadows/typography defaults) to support a coherent light educational theme with accessible contrast and consistent card styling."
+        },
+        {
+          "path": "frontend/src/components/layout/AppLayout.tsx",
+          "operation": "create",
+          "description": "Create a responsive app shell (header + content container + optional footer) that applies consistent spacing, max width, and accessible focus handling across pages. Use shadcn-ui primitives where appropriate to standardize UI. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/ui/EmptyState.tsx",
+          "operation": "create",
+          "description": "Create a reusable empty-state component (title/body/action) aligned to the theme for consistent UX across lists (notes/papers/mcqs/search). Use shadcn-ui primitives where appropriate. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/ui/LoadingState.tsx",
+          "operation": "create",
+          "description": "Create a reusable loading-state component (skeleton/spinner + accessible text) consistent with the theme. Use shadcn-ui primitives where appropriate. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/ui/ErrorState.tsx",
+          "operation": "create",
+          "description": "Create a reusable error-state component (message + retry callback) with accessible semantics and consistent styling. Use shadcn-ui primitives where appropriate. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Implement the primary navigation and page structure: Home, Branch, Semester, Subject, Study Materials, Question Papers, MCQ Practice, Syllabus Overview, Search Results, Login/Register, and Admin Panel.",
+      "acceptanceCriteria": [
+        "Users can navigate from Home → Branch → Semester → Subject pages.",
+        "Each Subject page provides tabs/sections for Notes (PDF), Question Papers, MCQs, and Syllabus Overview.",
+        "Navigation is usable on mobile (e.g., responsive header/menu)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "create",
+          "description": "Create the app root with routing for required pages (Home, Branch, Semester/Subject, Search Results, Login/Register, Admin Panel) and wrap routed content in the shared AppLayout."
+        },
+        {
+          "path": "frontend/src/components/nav/Header.tsx",
+          "operation": "create",
+          "description": "Create a responsive header with navigation links (Home, Search, Login/Register, Admin when authorized) and a mobile-friendly menu. Use shadcn-ui navigation/menu primitives where appropriate. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/HomePage.tsx",
+          "operation": "create",
+          "description": "Create the Home page that lists branches as cards and supports navigation into a selected branch (and onward to semesters/subjects)."
+        },
+        {
+          "path": "frontend/src/pages/BranchPage.tsx",
+          "operation": "create",
+          "description": "Create a Branch landing page that shows the branch name, semesters list, and a subject list for the selected semester."
+        },
+        {
+          "path": "frontend/src/pages/SubjectPage.tsx",
+          "operation": "create",
+          "description": "Create the Subject page container that hosts tabs/sections for Notes, Question Papers, MCQs, and Syllabus Overview; include actions that navigate to practice mode and downloads."
+        },
+        {
+          "path": "frontend/src/pages/SearchResultsPage.tsx",
+          "operation": "create",
+          "description": "Create a Search Results page that renders categorized results and supports navigation to the relevant subject/content."
+        },
+        {
+          "path": "frontend/src/pages/AuthPage.tsx",
+          "operation": "create",
+          "description": "Create a Login/Register page that uses Internet Identity sign-in/sign-out and first-time profile setup UX."
+        },
+        {
+          "path": "frontend/src/pages/admin/AdminPanelPage.tsx",
+          "operation": "create",
+          "description": "Create the Admin Panel page that provides upload/manage flows for notes, question papers, MCQs, and syllabus editing (guarded by admin-only access)."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Display the seven supported branches with branch landing pages listing semesters and subjects.",
+      "acceptanceCriteria": [
+        "Home page shows all listed branches as selectable cards.",
+        "Each branch page shows semester list and (when selected) subjects for that semester.",
+        "Branch names are user-facing in English exactly as provided (or common abbreviations only if also shown alongside full names)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/data/branches.ts",
+          "operation": "create",
+          "description": "Define the canonical list of supported branches (Computer Engineering, IT, Mechanical, Electrical, Civil, Electronics, Automobile) with stable UI slugs and icon asset mappings."
+        },
+        {
+          "path": "frontend/src/components/branches/BranchCard.tsx",
+          "operation": "create",
+          "description": "Create a branch card component showing icon + branch name in a consistent, accessible card layout. Use shadcn-ui Card primitives where appropriate. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/HomePage.tsx",
+          "operation": "modify",
+          "description": "Wire the canonical branch list into the Home page and render BranchCard for each branch with navigation into the corresponding branch route."
+        },
+        {
+          "path": "frontend/src/pages/BranchPage.tsx",
+          "operation": "modify",
+          "description": "Use backend-driven semesters/subjects for the selected branch, while keeping the user-facing branch name consistent with the canonical English names."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Add Internet Identity authentication with first-login user profile creation and logged-in UI state.",
+      "acceptanceCriteria": [
+        "Users can sign in and sign out using Internet Identity.",
+        "On first successful sign-in, a user profile record is created in the backend keyed by Principal.",
+        "UI clearly indicates whether the user is logged in (e.g., account menu / sign-in button)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useCurrentUser.ts",
+          "operation": "create",
+          "description": "Create a React Query hook that combines Internet Identity state (useInternetIdentity) with backend calls (useActor) to fetch the caller role and caller profile; ensure it avoids profile-setup modal flashing per the authorization component guidance. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/auth/LoginButton.tsx",
+          "operation": "create",
+          "description": "Create a login/logout button component that uses Internet Identity and clears React Query cache on logout. Base it on the authorization component's recommended pattern. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/auth/ProfileSetupDialog.tsx",
+          "operation": "create",
+          "description": "Create a first-login profile setup dialog prompting for a user name and saving it via saveCallerUserProfile; only show when authenticated and getCallerUserProfile returns null. Use shadcn-ui Dialog/Form primitives where appropriate. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/AuthPage.tsx",
+          "operation": "modify",
+          "description": "Wire LoginButton and ProfileSetupDialog into the Auth page, and display a clear logged-in state using the saved profile name (avoid showing principal id)."
+        },
+        {
+          "path": "frontend/src/components/nav/Header.tsx",
+          "operation": "modify",
+          "description": "Show logged-in state in the header (profile name + logout) and show a sign-in call-to-action when unauthenticated."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Enforce admin-only access to the Admin Panel in the UI (route guarding + disabled/blocked actions for non-admins).",
+      "acceptanceCriteria": [
+        "Admin routes/components are not accessible to non-admin users (redirect or show access denied).",
+        "Backend enforces admin-only mutations (cannot be bypassed by calling the canister directly).",
+        "Provide a backend method to list current admins and to add/remove admins (admin-only)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/auth/AdminRouteGuard.tsx",
+          "operation": "create",
+          "description": "Create a route guard wrapper that checks isCallerAdmin (via React Query) and renders either the AdminPanelPage or an access denied screen (or redirects). Handle authorization failures gracefully per the authorization component guidance. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/auth/AccessDeniedScreen.tsx",
+          "operation": "create",
+          "description": "Create an AccessDeniedScreen component for unauthorized access attempts, consistent with the theme and accessible. Use shadcn-ui primitives where appropriate. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/admin/AdminPanelPage.tsx",
+          "operation": "modify",
+          "description": "Ensure all admin actions are visually and functionally blocked for non-admin users (even if somehow rendered), and surface authorization errors returned by the backend as user-friendly messages."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire the AdminPanel route to use AdminRouteGuard so non-admin users cannot access the admin UI."
+        }
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "summary": "Implement Notes (PDF study materials): subject-wise listing, admin upload with metadata, and student download action.",
+      "acceptanceCriteria": [
+        "Students can view a list of notes for a selected subject and download a PDF.",
+        "Admins can upload a new PDF note and see it appear in the subject’s notes list.",
+        "Each note shows at least title and relevant academic context (branch/semester/subject) in the UI."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/queries/notes.ts",
+          "operation": "create",
+          "description": "Create React Query hooks for fetching notes by subject and for admin mutations to add/update/delete notes, using the generated backend interface types."
+        },
+        {
+          "path": "frontend/src/components/subject/NotesList.tsx",
+          "operation": "create",
+          "description": "Create the Notes list UI for a subject: loading/empty/error states, note rows/cards with title/year/tags, and a download action that uses blob-storage ExternalBlob.getDirectURL() to download only on user action. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/admin/NotesManager.tsx",
+          "operation": "create",
+          "description": "Create an admin-only notes manager UI with a form for metadata and PDF upload using blob-storage ExternalBlob.fromBytes(...).withUploadProgress(...). Include basic validation and upload progress. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/SubjectPage.tsx",
+          "operation": "modify",
+          "description": "Add/enable the Notes tab/section and render NotesList for the selected subject."
+        },
+        {
+          "path": "frontend/src/pages/admin/AdminPanelPage.tsx",
+          "operation": "modify",
+          "description": "Wire NotesManager into the Admin Panel (admin-only section) and ensure successful uploads invalidate/refetch relevant notes queries."
+        }
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "summary": "Implement Question Papers (PDF): subject-wise listing, admin upload/manage, and filtering/sorting by year.",
+      "acceptanceCriteria": [
+        "Students can view a list of question papers for a selected subject and download a PDF.",
+        "Admins can upload question papers and manage (edit/delete) entries.",
+        "UI supports basic filtering/sorting by year when multiple papers exist."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/queries/questionPapers.ts",
+          "operation": "create",
+          "description": "Create React Query hooks for fetching question papers by subject and for admin mutations to add/update/delete papers, using the generated backend interface types."
+        },
+        {
+          "path": "frontend/src/components/subject/QuestionPapersList.tsx",
+          "operation": "create",
+          "description": "Create the Question Papers list UI with loading/empty/error states, sort/filter controls by year, and download actions that use blob-storage ExternalBlob.getDirectURL() only when clicked. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/admin/QuestionPapersManager.tsx",
+          "operation": "create",
+          "description": "Create an admin manager UI to upload and edit/delete question paper entries (year + optional exam type + PDF upload with progress via ExternalBlob). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/SubjectPage.tsx",
+          "operation": "modify",
+          "description": "Add/enable the Question Papers tab/section and render QuestionPapersList for the selected subject."
+        },
+        {
+          "path": "frontend/src/pages/admin/AdminPanelPage.tsx",
+          "operation": "modify",
+          "description": "Wire QuestionPapersManager into the Admin Panel and ensure query invalidation/refetch after changes."
+        }
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "summary": "Implement MCQ browsing (with answers/explanations) and MCQ practice mode with scoring.",
+      "acceptanceCriteria": [
+        "Students can browse MCQs for a subject and reveal correct answers.",
+        "Practice mode allows answering a set of MCQs and shows a final score (e.g., X/Y) and optionally a review of incorrect questions.",
+        "MCQs are stored and managed via Admin Panel (add/edit/delete)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/queries/mcqs.ts",
+          "operation": "create",
+          "description": "Create React Query hooks for fetching MCQs by subject, fetching MCQ by id if needed, evaluating answers for practice scoring, and admin mutations to add/update/delete MCQs."
+        },
+        {
+          "path": "frontend/src/components/subject/MCQBrowser.tsx",
+          "operation": "create",
+          "description": "Create an MCQ browsing UI for a subject with loading/empty/error states, reveal answer/explanation interactions, and accessible option rendering. Use shadcn-ui components (e.g., Accordion/Card/Button) as appropriate. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/MCQPracticePage.tsx",
+          "operation": "create",
+          "description": "Create an MCQ Practice page that sequences or randomizes questions for a subject, captures selections, submits to evaluateMCQAnswers, and displays final score and review of incorrect questions."
+        },
+        {
+          "path": "frontend/src/components/admin/MCQManager.tsx",
+          "operation": "create",
+          "description": "Create an admin MCQ manager UI to add/edit/delete questions with options, correct answer, and optional explanation; include basic validation. Use shadcn-ui form primitives where appropriate. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/SubjectPage.tsx",
+          "operation": "modify",
+          "description": "Add/enable the MCQs tab/section and render MCQBrowser; provide a clear call-to-action link/button to start practice mode."
+        },
+        {
+          "path": "frontend/src/pages/admin/AdminPanelPage.tsx",
+          "operation": "modify",
+          "description": "Wire MCQManager into the Admin Panel and ensure query invalidation/refetch after changes."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Register the MCQ Practice route and ensure navigation into it from the Subject page is wired and functional."
+        }
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "summary": "Show syllabus overview per subject and allow admins to update it from the Admin Panel.",
+      "acceptanceCriteria": [
+        "Each subject can display a syllabus overview section (structured text or headings) retrieved from the backend.",
+        "Admins can update syllabus content for a subject in the Admin Panel.",
+        "Syllabus content is readable and responsive, using consistent typography."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/queries/syllabus.ts",
+          "operation": "create",
+          "description": "Create React Query hooks to fetch syllabus by subject and admin mutations to add/update/delete syllabus content."
+        },
+        {
+          "path": "frontend/src/components/subject/SyllabusOverview.tsx",
+          "operation": "create",
+          "description": "Create a readable, responsive syllabus overview renderer using consistent typography (e.g., Tailwind typography plugin classes) and explicit loading/empty/error states."
+        },
+        {
+          "path": "frontend/src/components/admin/SyllabusEditor.tsx",
+          "operation": "create",
+          "description": "Create an admin syllabus editor for a subject (textarea/structured input) that updates syllabus content and handles success/error states. Use shadcn-ui form primitives where appropriate. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/SubjectPage.tsx",
+          "operation": "modify",
+          "description": "Add/enable the Syllabus Overview tab/section and render SyllabusOverview for the selected subject."
+        },
+        {
+          "path": "frontend/src/pages/admin/AdminPanelPage.tsx",
+          "operation": "modify",
+          "description": "Wire SyllabusEditor into the Admin Panel and ensure syllabus queries are invalidated/refetched after updates."
+        }
+      ]
+    },
+    {
+      "id": "REQ-11",
+      "summary": "Add a global search bar that searches across subjects, notes, question papers, and MCQs with categorized results and navigation.",
+      "acceptanceCriteria": [
+        "Typing a query returns results that include matches from subjects, notes, papers, and MCQs.",
+        "Search results are grouped or labeled by type (e.g., Subjects / Notes / Papers / MCQs).",
+        "Selecting a result navigates to the relevant page (subject detail or specific content listing)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/queries/search.ts",
+          "operation": "create",
+          "description": "Create a React Query hook for backend search(searchTerm) with debounced input support and caching keyed by query string."
+        },
+        {
+          "path": "frontend/src/components/search/GlobalSearchBar.tsx",
+          "operation": "create",
+          "description": "Create a global search input component placed in the header; on submit (and/or debounced), navigate to Search Results page with the query. Use shadcn-ui Input/Button primitives where appropriate. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/SearchResultsPage.tsx",
+          "operation": "modify",
+          "description": "Render categorized results (Subjects/Notes/Papers/MCQs) and provide navigation links to the appropriate Subject page/tab or practice flow where relevant."
+        },
+        {
+          "path": "frontend/src/components/nav/Header.tsx",
+          "operation": "modify",
+          "description": "Wire GlobalSearchBar into the header for consistent access across the app."
+        }
+      ]
+    },
+    {
+      "id": "REQ-12",
+      "summary": "Ensure fast-loading, accessible UX with efficient React Query caching and explicit loading/empty/error states; avoid downloading PDFs on initial render.",
+      "acceptanceCriteria": [
+        "All data-driven screens have explicit loading and error UI states.",
+        "Repeated navigations reuse cached data where appropriate (no excessive refetching).",
+        "No page depends on downloading large PDFs just to render the listing UI (PDFs download only on user action)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/main.tsx",
+          "operation": "modify",
+          "description": "Configure the React Query client with sensible defaults for caching/stale times and retry behavior to reduce excessive refetching while keeping data fresh."
+        },
+        {
+          "path": "frontend/src/pages/BranchPage.tsx",
+          "operation": "modify",
+          "description": "Ensure semesters/subjects data loads with explicit loading/empty/error states using shared UI components, and leverages React Query caching for repeated navigations."
+        },
+        {
+          "path": "frontend/src/pages/SubjectPage.tsx",
+          "operation": "modify",
+          "description": "Ensure Notes/Papers/MCQs/Syllabus sections each show explicit loading/empty/error states and that PDF blobs are only fetched/downloaded on user action (use ExternalBlob.getDirectURL()). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/ui/LoadingState.tsx",
+          "operation": "modify",
+          "description": "Ensure loading UI is accessible (aria-live text where appropriate) and visually consistent across modules."
+        },
+        {
+          "path": "frontend/src/components/ui/ErrorState.tsx",
+          "operation": "modify",
+          "description": "Ensure error UI handles authorization failures (from backend traps) gracefully and provides a retry action where applicable, without leaking internal details."
+        }
+      ]
+    },
+    {
+      "id": "REQ-13",
+      "summary": "Add and display static generated icons for the seven branches on branch cards and/or headers.",
+      "acceptanceCriteria": [
+        "The seven branch icons are present in frontend/public/assets/generated and are used in the UI.",
+        "Icons are visually consistent (same style, stroke/filled treatment, and sizing) and remain clear on light backgrounds.",
+        "Branch cards show icon + branch name in a clean, modern layout."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/public/assets/generated/branch-computer.dim_256x256.png",
+          "operation": "create",
+          "description": "Add the generated branch icon asset to the required path so the UI can reference it as a static public asset."
+        },
+        {
+          "path": "frontend/public/assets/generated/branch-it.dim_256x256.png",
+          "operation": "create",
+          "description": "Add the generated branch icon asset to the required path so the UI can reference it as a static public asset."
+        },
+        {
+          "path": "frontend/public/assets/generated/branch-mechanical.dim_256x256.png",
+          "operation": "create",
+          "description": "Add the generated branch icon asset to the required path so the UI can reference it as a static public asset."
+        },
+        {
+          "path": "frontend/public/assets/generated/branch-electrical.dim_256x256.png",
+          "operation": "create",
+          "description": "Add the generated branch icon asset to the required path so the UI can reference it as a static public asset."
+        },
+        {
+          "path": "frontend/public/assets/generated/branch-civil.dim_256x256.png",
+          "operation": "create",
+          "description": "Add the generated branch icon asset to the required path so the UI can reference it as a static public asset."
+        },
+        {
+          "path": "frontend/public/assets/generated/branch-electronics.dim_256x256.png",
+          "operation": "create",
+          "description": "Add the generated branch icon asset to the required path so the UI can reference it as a static public asset."
+        },
+        {
+          "path": "frontend/public/assets/generated/branch-automobile.dim_256x256.png",
+          "operation": "create",
+          "description": "Add the generated branch icon asset to the required path so the UI can reference it as a static public asset."
+        },
+        {
+          "path": "frontend/src/data/branches.ts",
+          "operation": "modify",
+          "description": "Map each supported branch to its corresponding generated icon file under frontend/public/assets/generated (using the exact filenames) for consistent rendering."
+        },
+        {
+          "path": "frontend/src/components/branches/BranchCard.tsx",
+          "operation": "modify",
+          "description": "Render the mapped generated icon next to the branch name with consistent sizing and accessible alt text; ensure good contrast on light backgrounds."
+        },
+        {
+          "path": "frontend/src/pages/BranchPage.tsx",
+          "operation": "modify",
+          "description": "Optionally show the branch icon in the branch header for stronger visual identity while keeping the layout minimal and responsive."
+        }
+      ]
+    }
+  ]
+}

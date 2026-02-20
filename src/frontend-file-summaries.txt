@@ -1,0 +1,21 @@
+{
+  "frontend/src/lib/utils.ts": "Utility function for merging Tailwind CSS classes using clsx and tailwind-merge.",
+  "frontend/src/components/ui/LoadingState.tsx": "Reusable loading state component with spinner and customizable message for consistent loading UX across the app.",
+  "frontend/src/components/ui/EmptyState.tsx": "Reusable empty state component with icon, title, description, and optional action button for consistent empty state UX.",
+  "frontend/src/components/ui/ErrorState.tsx": "Reusable error state component with alert styling, error message, and optional retry action for consistent error handling UX.",
+  "frontend/src/components/branches/BranchCard.tsx": "Branch card component that displays branch icon, name, and description with navigation to branch page using useNavigate hook.",
+  "frontend/src/components/subject/MCQBrowser.tsx": "MCQ browser component that displays all MCQs for a subject with accordion UI, shows correct answers and explanations, and provides navigation to practice mode.",
+  "frontend/src/pages/BranchPage.tsx": "Branch page that displays semesters and subjects for a selected branch with proper navigation using useNavigate hook.",
+  "frontend/src/pages/MCQPracticePage.tsx": "MCQ practice page with question navigation, answer selection, score evaluation, and results display using proper TanStack Router navigation.",
+  "frontend/src/pages/SearchResultsPage.tsx": "Search results page that displays categorized search results (subjects, notes, papers, MCQs) with proper navigation to detail pages.",
+  "frontend/src/components/admin/MCQManager.tsx": "Admin component for creating and managing MCQs with dynamic options, correct answer selection, and optional explanations.",
+  "frontend/src/components/admin/SyllabusEditor.tsx": "Admin component for creating and editing syllabus content for subjects with branch/semester/subject selection.",
+  "frontend/src/components/common/LoadingState.tsx": "Reusable loading state component with spinner and customizable message for consistent loading UX across the app.",
+  "frontend/src/components/common/EmptyState.tsx": "Reusable empty state component with icon, title, description, and optional action button for consistent empty state UX.",
+  "frontend/src/components/common/ErrorState.tsx": "Reusable error state component with alert styling, error message, and optional retry action for consistent error handling UX.",
+  "frontend/src/components/auth/AdminRouteGuard.tsx": "Route guard component that checks admin permissions and displays loading or access denied screens accordingly.",
+  "frontend/src/components/subject/NotesList.tsx": "Component that displays a list of study notes for a subject with download functionality and admin delete actions.",
+  "frontend/src/components/subject/QuestionPapersList.tsx": "Component that displays previous year question papers with sorting, download functionality, and admin delete actions.",
+  "frontend/src/components/subject/SyllabusOverview.tsx": "Component that displays the syllabus overview content for a subject with proper loading and empty states.",
+  "frontend/src/pages/SubjectPage.tsx": "Subject detail page with tabs for notes, question papers, MCQs, and syllabus overview for a selected subject."
+}

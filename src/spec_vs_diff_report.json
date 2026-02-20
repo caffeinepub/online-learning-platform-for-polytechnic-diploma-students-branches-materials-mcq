@@ -1,0 +1,71 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-11T08:51:58.204Z",
+  "summary": "The diff adds a Motoko backend actor with data models (branches/semesters/subjects/notes/papers/MCQs/syllabus/user profile), plus a new React/TanStack Router frontend with admin guards, content upload/management components, search bar, and common loading/empty/error states. However, some specified deliverables are not evidenced in the provided diff summary (notably the required generated branch icon assets), and there is at least one unrequested branding/link addition in the footer.",
+  "missing_requirements": [
+    {
+      "id": "REQ-13",
+      "requirement": "Add static generated icons/illustrations for the seven branches and display them on branch cards and/or headers (icons must be present in frontend/public/assets/generated).",
+      "reason": "Branch cards expect an icon URL prop, but the diff summary does not show any added files under frontend/public/assets/generated or the required PNG icon filenames.",
+      "evidence": [
+        "frontend/src/components/branches/BranchCard.tsx"
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "Footer includes a promotional/attribution link to caffeine.ai (with UTM parameters) and 'Built with ... using caffeine.ai' text.",
+      "reason": "Not requested in the BuildRequest; adds external branding/marketing content to a user-facing area.",
+      "evidence": [
+        "frontend/src/components/layout/Footer.tsx"
+      ]
+    }
+  ],
+  "confidence": 0.62,
+  "changed_files": [
+    "all_files_summary.json",
+    "backend/main.mo",
+    "frontend-file-summaries.txt",
+    "frontend/index.css",
+    "frontend/index.html",
+    "frontend/src/App.tsx",
+    "frontend/src/components/admin/ContentSetup.tsx",
+    "frontend/src/components/admin/MCQManager.tsx",
+    "frontend/src/components/admin/NotesManager.tsx",
+    "frontend/src/components/admin/QuestionPapersManager.tsx",
+    "frontend/src/components/admin/SyllabusEditor.tsx",
+    "frontend/src/components/auth/AccessDeniedScreen.tsx",
+    "frontend/src/components/auth/AdminRouteGuard.tsx",
+    "frontend/src/components/auth/ProfileSetupDialog.tsx",
+    "frontend/src/components/branches/BranchCard.tsx",
+    "frontend/src/components/common/EmptyState.tsx",
+    "frontend/src/components/common/ErrorState.tsx",
+    "frontend/src/components/common/LoadingState.tsx",
+    "frontend/src/components/layout/AppLayout.tsx",
+    "frontend/src/components/layout/Footer.tsx",
+    "frontend/src/components/nav/Header.tsx",
+    "frontend/src/components/search/GlobalSearchBar.tsx",
+    "frontend/src/components/subject/MCQBrowser.tsx",
+    "frontend/src/components/subject/NotesList.tsx",
+    "frontend/src/components/subject/QuestionPapersList.tsx",
+    "frontend/src/components/subject/SyllabusOverview.tsx",
+    "frontend/src/data/branches.ts",
+    "frontend/src/hooks/useActor.ts",
+    "frontend/src/hooks/useInternetIdentity.ts",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/index.css",
+    "frontend/src/lib/utils.ts",
+    "frontend/src/main.tsx",
+    "frontend/src/pages/AuthPage.tsx",
+    "frontend/src/pages/BranchPage.tsx",
+    "frontend/src/pages/HomePage.tsx",
+    "frontend/src/pages/MCQPracticePage.tsx",
+    "frontend/src/pages/SearchResultsPage.tsx",
+    "frontend/src/pages/SubjectPage.tsx",
+    "frontend/src/pages/admin/AdminPanelPage.tsx",
+    "frontend/src/utils/urlParams.ts",
+    "frontend/tailwind.config.js",
+    "project_state.json"
+  ]
+}
